@@ -4,7 +4,7 @@
  <img src="https://codecov.io/github/moraki-finance/ruby-experian/graph/badge.svg?token=SKTT14JJGV"/>
 </a>
 
-![example branch parameter](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+[![Tests](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml)
 
 Use the [Experian Axesor Informe 360](https://axesor.es/blog/openai-api/](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx)https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx) API with Ruby! 🩵
 
