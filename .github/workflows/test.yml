@@ -14,7 +14,6 @@ concurrency:
 
 env:
   GITHUB_ARTIFACTS: coverage
-  CI_NODE_INDEX: ${{ matrix.ci_node_index }}
 
 jobs:
   test:
