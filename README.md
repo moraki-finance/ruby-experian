@@ -4,6 +4,8 @@
  <img src="https://codecov.io/github/moraki-finance/ruby-experian/graph/badge.svg?token=SKTT14JJGV"/>
 </a>
 
+![example branch parameter](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
+
 Use the [Experian Axesor Informe 360](https://axesor.es/blog/openai-api/](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx)https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx) API with Ruby! 🩵
 
 Allows you to get a detailed credit risk report for Spanish companies.
