@@ -79,7 +79,11 @@ module Experian
       query.merge!(tip_formato:)
       full_uri = uri(path:, query:)
 
-      return conn.get(full_uri) if format == :xml
+      if format == :xml
+        return conn.get(full_uri) do |req|
+          req.headers = headers
+        end
+      end
 
       full_uri
     end
@@ -109,6 +113,10 @@ module Experian
       SHA3::Digest.hexdigest(:sha256, query.values.join << password)
     rescue => e
       raise Experian::Error, "Error calculating CRC: #{e.message}"
+    end
+
+    def headers
+      {}.merge(extra_headers)
     end
   end
 end

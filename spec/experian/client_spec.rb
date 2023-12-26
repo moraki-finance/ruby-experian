@@ -1,4 +1,11 @@
 RSpec.describe Experian::Client do
+
+  around do |example|
+    VCR.use_cassette("axesor") do
+      example.run
+    end
+  end
+
   describe ".initialize" do
     it "sets the configuration" do
       client = Experian::Client.new(user_code: 'user', password: 'password', base_uri: 'https://example.com')
@@ -26,12 +33,6 @@ RSpec.describe Experian::Client do
 
     describe "axesor", :vcr do
       let(:cif) { "A18413302" }
-
-      around do |example|
-        VCR.use_cassette("axesor") do
-          example.run
-        end
-      end
 
       it "uses the user & password to calculate the CRC" do
         report
@@ -91,15 +92,17 @@ RSpec.describe Experian::Client do
         allow(SHA3::Digest).to receive(:hexdigest).and_return("wrong_crc")
       end
 
-      around do |example|
-        VCR.use_cassette("axesor") do
-          example.run
-        end
-      end
-
       it "fails gracefully" do
         expect { report }.to raise_error(Experian::AuthenticationError)
       end
+    end
+  end
+
+  describe "headers" do
+    it "allows to pass in extra headers" do
+      client = Experian::Client.new(extra_headers: { "X-Extra-Header" => "value" })
+      report = client.report(cif: "A18413302")
+      report.response.env.request_headers["X-Extra-Header"] == "value"
     end
   end
 end

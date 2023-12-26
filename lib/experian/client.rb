@@ -3,7 +3,7 @@ module Experian
     include Experian::HTTP
 
     CONFIG_KEYS = %i[
-      user_code password request_timeout base_uri
+      user_code password request_timeout base_uri extra_headers
     ].freeze
     attr_reader(*CONFIG_KEYS, :faraday_middleware)
 
