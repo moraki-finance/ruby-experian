@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   s.required_ruby_version = Gem::Requirement.new(">= 2.6.0")
-  s.homepage              = "https://github.com/moraki/ruby-experian"
+  s.homepage              = "https://github.com/moraki-finance/ruby-experian"
   s.license               = "MIT"
   s.bindir                = "bin"
   s.executables           = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
