@@ -1,9 +1,12 @@
 PATH
   remote: .
   specs:
-    ruby-experian (0.0.1)
+    ruby-experian (0.0.2)
       faraday (>= 1)
       faraday_middleware (>= 1)
+      multi_xml (>= 0.6.0)
+      rexml (>= 3.2)
+      sha3 (>= 1)
 
 GEM
   remote: https://rubygems.org/
@@ -104,17 +107,14 @@ PLATFORMS
 DEPENDENCIES
   byebug (~> 11.1)
   dotenv (~> 2.8.1)
-  multi_xml (~> 0.6.0)
   pry (~> 0.14.2)
   pry-byebug (~> 3.10)
   pry-rescue (~> 1.5)
   pry-stack_explorer (~> 0.6.1)
   rake (~> 13.1)
-  rexml (~> 3.2)
   rspec (~> 3.12)
   rubocop (~> 1.50.2)
   ruby-experian!
-  sha3
   simplecov
   simplecov-cobertura
   vcr (~> 6.1.0)
