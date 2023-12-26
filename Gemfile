@@ -9,9 +9,6 @@ gem "rspec", "~> 3.12"
 gem "rubocop", "~> 1.50.2"
 gem "vcr", "~> 6.1.0"
 gem "webmock", "~> 3.19.1"
-gem "sha3"
-gem "rexml", '~> 3.2'
-gem "multi_xml", '~> 0.6.0'
 
 group :development, :test do
   gem "byebug", "~> 11.1"
