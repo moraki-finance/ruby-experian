@@ -14,6 +14,7 @@ concurrency:
 
 env:
   GITHUB_ARTIFACTS: coverage
+  CI_NODE_INDEX: ${{ matrix.ci_node_index }}
 
 jobs:
   test:
@@ -39,3 +40,5 @@ jobs:
 
       - name: Upload coverage reports to Codecov with GitHub Action
         uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
