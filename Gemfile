@@ -20,3 +20,8 @@ group :development, :test do
   gem "pry-rescue", "~> 1.5"
   gem "pry-stack_explorer", "~> 0.6.1"
 end
+
+group :test do
+  gem "simplecov"
+  gem "simplecov-cobertura"
+end

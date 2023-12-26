@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Ruby version specified in `.ruby-version`
+        uses: eregon/use-ruby-action@master # this will use by default the .ruby-version file in your repository
+
+      - name: Install required apt packages
+        run: |
+          sudo apt-get -y install libpq-dev
+
+      - name: Bundle install
+        run: |
+          bundle config path vendor/bundle
+          bundle install
+
+      - name: Rspec tests
+        run: bundle exec rspec
+        env:
+          COVERAGE_DIR: coverage
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4-beta
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          file: coverage/coverage.xml
