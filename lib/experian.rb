@@ -8,6 +8,7 @@ require_relative "experian/report"
 
 module Experian
   class Error < StandardError; end
+  class AuthenticationError < Error; end
   class ConfigurationError < Error; end
 
   class MiddlewareErrors < Faraday::Middleware

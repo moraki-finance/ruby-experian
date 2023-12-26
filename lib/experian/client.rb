@@ -3,7 +3,7 @@ module Experian
     include Experian::HTTP
 
     CONFIG_KEYS = %i[
-      user_code password version request_timeout base_uri
+      user_code password request_timeout base_uri
     ].freeze
     attr_reader(*CONFIG_KEYS, :faraday_middleware)
 
@@ -19,7 +19,7 @@ module Experian
     def report(cif:, format: :xml)
       response = get(path: "/informe", format:, cif:, cod_servicio: 57)
 
-      return Experian::Report.new(response&.body) if format == :xml
+      return Experian::Report.new(response) if format == :xml
 
       response
     end

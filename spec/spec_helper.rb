@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "dotenv/load"
 require "experian"
+require "pry"
 require "vcr"
 
 Dir[File.expand_path("spec/support/**/*.rb")].sort.each { |f| require f }
@@ -11,8 +12,6 @@ VCR.configure do |c|
   c.default_cassette_options = {
     record: ENV.fetch("EXPERIAN_USER_CODE", nil) ? :all : :new_episodes,
   }
-  c.filter_sensitive_data("<EXPERIAN_USER_CODE>") { Experian.configuration.user_code }
-  c.filter_sensitive_data("<EXPERIAN_PASSWORD>") { Experian.configuration.password }
 end
 
 RSpec.configure do |c|
@@ -26,10 +25,9 @@ RSpec.configure do |c|
     rspec.syntax = :expect
   end
 
-  if ENV.fetch("EXPERIAN_USER_CODE", nil)
-    warning = "WARNING! Specs are hitting the Experian API using your EXPERIAN_USER_CODE! This
-costs at least 2 cents per run and is very slow! If you don't want this, unset
-EXPERIAN_USER_CODE to just run against the stored VCR responses.".freeze
+  if ENV.fetch("EXPERIAN_USER_CODE", nil) || ENV.fetch("EXPERIAN_PASSWORD", nil)
+    warning = "WARNING! Specs are hitting the Experian API! This is very slow! If you don't want this, unset
+EXPERIAN_USER_CODE and EXPERIAN_PASSWORD to run against the stored VCR responses.".freeze
     warning = RSpec::Core::Formatters::ConsoleCodes.wrap(warning, :bold_red)
 
     c.before(:suite) { RSpec.configuration.reporter.message(warning) }
@@ -38,8 +36,8 @@ EXPERIAN_USER_CODE to just run against the stored VCR responses.".freeze
 
   c.before(:all) do
     Experian.configure do |config|
-      config.user_code = ENV.fetch("EXPERIAN_USER_CODE", "dummy-user")
-      config.password = ENV.fetch("EXPERIAN_PASSWORD", "dummy-password")
+      config.user_code = ENV.fetch("EXPERIAN_USER_CODE", "fake_user")
+      config.password = ENV.fetch("EXPERIAN_PASSWORD", "fake_password")
     end
   end
 end

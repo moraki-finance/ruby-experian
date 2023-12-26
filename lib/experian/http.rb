@@ -1,6 +1,5 @@
 require "base64"
 require "sha3"
-require "byebug"
 
 module Experian
   module HTTP
@@ -87,13 +86,12 @@ module Experian
 
     private
 
-    def conn(response_format: :xml)
+    def conn
       connection = Faraday.new do |f|
         f.options[:timeout] = request_timeout
         f.options[:params_encoder] = FlatParamsEncoder
         f.use MiddlewareErrors
         f.response :raise_error
-        f.response response_format
       end
 
       @faraday_middleware&.call(connection)
