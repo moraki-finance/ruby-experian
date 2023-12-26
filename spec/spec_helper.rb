@@ -4,6 +4,19 @@ require "experian"
 require "pry"
 require "vcr"
 
+if ENV["GITHUB_ARTIFACTS"]
+  require "simplecov"
+  require "codecov"
+
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  SimpleCov.command_name "#{SimpleCov::CommandGuesser.guess} #{(ENV["CI_NODE_INDEX"].to_i + 1) || "1"}"
+
+  dir = File.join(ENV["GITHUB_  ARTIFACTS"], "simplecov-#{ENV["PROJECT_UNDER_TEST"]}-#{ENV["CI_NODE_INDEX"] || "0"}")
+  SimpleCov.coverage_dir(dir)
+
+  SimpleCov.start
+end
+
 Dir[File.expand_path("spec/support/**/*.rb")].sort.each { |f| require f }
 
 VCR.configure do |c|
