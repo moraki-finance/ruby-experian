@@ -6,10 +6,9 @@ require "vcr"
 
 if ENV["COVERAGE_DIR"]
   require "simplecov"
-  require "codecov"
-
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  require "simplecov-cobertura"
   SimpleCov.coverage_dir(File.join(ENV["COVERAGE_DIR"]))
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
   SimpleCov.start
 end
 

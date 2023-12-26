@@ -35,4 +35,10 @@ jobs:
         run: bundle exec rspec
         env:
           COVERAGE_DIR: coverage
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4-beta
+        env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          file: coverage/coverage.xml

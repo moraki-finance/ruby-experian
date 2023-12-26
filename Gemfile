@@ -23,5 +23,5 @@ end
 
 group :test do
   gem "simplecov"
-  gem "codecov"
+  gem "simplecov-cobertura"
 end
