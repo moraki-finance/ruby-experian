@@ -11,7 +11,7 @@ if ENV["GITHUB_ARTIFACTS"]
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
   SimpleCov.command_name "#{SimpleCov::CommandGuesser.guess} #{(ENV["CI_NODE_INDEX"].to_i + 1) || "1"}"
 
-  dir = File.join(ENV["GITHUB_  ARTIFACTS"], "simplecov-#{ENV["PROJECT_UNDER_TEST"]}-#{ENV["CI_NODE_INDEX"] || "0"}")
+  dir = File.join(ENV["GITHUB_ARTIFACTS"], "simplecov-ruby-experian-#{ENV.fetch("CI_NODE_INDEX", "0")}")
   SimpleCov.coverage_dir(dir)
 
   SimpleCov.start
