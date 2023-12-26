@@ -12,9 +12,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
-env:
-  GITHUB_ARTIFACTS: coverage
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -36,8 +33,6 @@ jobs:
 
       - name: Rspec tests
         run: bundle exec rspec
-
-      - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v3
         env:
+          COVERAGE_DIR: coverage
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
