@@ -3,8 +3,8 @@ require_relative "lib/experian/version"
 Gem::Specification.new do |s|
   s.name                  = "ruby-experian"
   s.version               = Experian::VERSION
-  s.summary               = "Experian connector"
-  s.description           = "A simple hello world gem"
+  s.summary               = "Experian Axesor client"
+  s.description           = "Experian Axesor (https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx) client for ruby"
   s.authors               = ["Martin Mochetti"]
   s.email                 = "martin@moraki.co"
   s.files                 = Dir.chdir(File.expand_path(__dir__)) do

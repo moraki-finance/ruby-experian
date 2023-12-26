@@ -6,7 +6,7 @@
 
 [![Tests](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml)
 
-Use the [Experian Axesor Informe 360](<https://axesor.es/blog/openai-api/](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx)https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx>) API with Ruby! 🩵
+Use the [Experian Axesor Informe 360](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx) API with Ruby! 🩵
 
 Allows you to get a detailed credit risk report for Spanish companies.
 
