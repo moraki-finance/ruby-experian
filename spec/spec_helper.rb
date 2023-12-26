@@ -1,8 +1,7 @@
 require "bundler/setup"
 require "dotenv/load"
 require "experian"
-require "pry"
-require "vcr"
+Bundler.require(:default, :development, :test)
 
 if ENV["COVERAGE_DIR"]
   require "simplecov"

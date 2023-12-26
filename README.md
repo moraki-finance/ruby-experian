@@ -6,7 +6,7 @@
 
 [![Tests](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/moraki-finance/ruby-experian/actions/workflows/tests.yml)
 
-Use the [Experian Axesor Informe 360](https://axesor.es/blog/openai-api/](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx)https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx) API with Ruby! 🩵
+Use the [Experian Axesor Informe 360](<https://axesor.es/blog/openai-api/](https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx)https://www.axesor.es/informacion-empresas/informes/informe-axesor-360.aspx>) API with Ruby! 🩵
 
 Allows you to get a detailed credit risk report for Spanish companies.
 
@@ -127,6 +127,7 @@ You can pass [Faraday middleware](https://lostisland.github.io/faraday/#/middlew
 You can hit the report api to get the 360 credit report from Experian by passing in a CIF to the call. Note that only some sections of the report are exposed. Other sections will be exposed as needed / requested.
 
 The exposed sections for now are:
+
 - id
 - address
 - rating
@@ -150,7 +151,13 @@ If you have an `EXPERIAN_USER_CODE` and `EXPERIAN_PASSWORD` in your `ENV`, runni
 
 ## Release
 
-First run the specs without VCR so they actually hit the API. Set `EXPERIAN_USER_CODE` and `EXPERIAN_PASSWORD` in your environment or pass it in like this:
+In order to release this gem, you'll need the `gem-release` gem globally installed:
+
+```bash
+gem install gem-release
+```
+
+Second, run the specs without VCR so they actually hit the API. Set `EXPERIAN_USER_CODE` and `EXPERIAN_PASSWORD` in your environment or pass it in like this:
 
 ```
 EXPERIAN_USER_CODE=code EXPERIAN_PASSWORD=password bundle exec rspec
