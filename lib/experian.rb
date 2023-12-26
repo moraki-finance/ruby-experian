@@ -28,8 +28,8 @@ module Experian
   end
 
   class Configuration
-    attr_writer :user_code, :password, :version, :request_timeout, :base_uri
-    attr_reader :base_uri, :request_timeout, :version
+    attr_writer :user_code, :password, :version, :request_timeout, :base_uri, :extra_headers
+    attr_reader :base_uri, :request_timeout, :version, :extra_headers
 
     DEFAULT_BASE_URI = "https://informes.axesor.es".freeze
     DEFAULT_VERSION = "9.0".freeze
@@ -41,6 +41,7 @@ module Experian
       @version = DEFAULT_VERSION
       @request_timeout = DEFAULT_REQUEST_TIMEOUT
       @base_uri = DEFAULT_BASE_URI
+      @extra_headers = {}
     end
 
     def user_code

@@ -82,4 +82,48 @@ http_interactions:
       string: <?xml version="1.0" encoding="iso-8859-15" ?><DatosError><CodError>1</CodError><DesError>El
         usuario no cumple las condiciones necesarias para el acceso a este producto</DesError><NomClase>WebAxesorFoundation.Negocio.MotorInformes.Extension.AddinInformeConEbe</NomClase><NomMetodo>CrearContextoProcesamientoEbe</NomMetodo></DatosError>
   recorded_at: Tue, 26 Dec 2023 12:59:46 GMT
+- request:
+    method: get
+    uri: https://informes.axesor.es/informe?cif=A18413302&cod_servicio=57&cod_usuario=fake_user&crc=4b16a1e899e93b122759047cbbfca1b787be97a4d3b2e5821c9a98fff041171c&tip_formato=2
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Extra-Header:
+      - value
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - private
+      Content-Type:
+      - text/xml; charset=iso-8859-15
+      Request-Context:
+      - appId=cid-v1:0a154a7e-9659-43e3-b1dc-be31a6c96355
+      Access-Control-Expose-Headers:
+      - Request-Context
+      Date:
+      - Tue, 26 Dec 2023 17:45:30 GMT
+      Vary:
+      - Accept-Encoding
+      X-Cdn:
+      - Imperva
+      Transfer-Encoding:
+      - chunked
+      X-Iinfo:
+      - 11-21588790-21588791 NNYN CT(215 430 0) RT(1703612732199 32) q(0 0 6 0) r(12
+        12) U2
+    body:
+      encoding: ASCII-8BIT
+      string: <?xml version="1.0" encoding="iso-8859-15" ?><DatosError><CodError>2</CodError><DesError>El
+        usuario no cumple las condiciones necesarias para el acceso a este producto</DesError><NomClase>WebAxesorFoundation.Negocio.MotorInformes.Extension.AddinInformeConEbe</NomClase><NomMetodo>CrearContextoProcesamientoEbe</NomMetodo></DatosError>
+  recorded_at: Tue, 26 Dec 2023 17:45:33 GMT
 recorded_with: VCR 6.1.0
