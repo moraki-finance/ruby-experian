@@ -8,7 +8,7 @@ gem "rake", "~> 13.1"
 gem "rspec", "~> 3.12"
 gem "rubocop", "~> 1.50.2"
 gem "vcr", "~> 6.1.0"
-gem "webmock", "~> 3.19.1"
+gem "webmock", "~> 3.22.0"
 
 group :development, :test do
   gem "byebug", "~> 11.1"
