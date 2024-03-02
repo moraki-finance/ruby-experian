@@ -44,7 +44,7 @@ require "experian"
 
 ### Quickstart
 
-For a quick test you can pass your token directly to a new client:
+For a quick test you can pass your user code and password directly to a new client:
 
 ```ruby
 client = Experian::Client.new(user_code: "user code goes here", password: "password goes here")
@@ -67,7 +67,7 @@ Then you can create a client like this:
 client = Experian::Client.new
 ```
 
-You can still override the config defaults when making new clients; any options not included will fall back to any global config set with Experian.configure. e.g. in this example the base_uri, request_timeout, etc. will fallback to any set globally using Experian.configure, with only the access_token overridden:
+You can still override the config defaults when making new clients; any options not included will fall back to any global config set with `Experian.configure`. e.g. in this example the base_uri, request_timeout, etc. will fallback to any set globally using `Experian.configure`, with only the password overridden:
 
 ```ruby
 client = Experian::Client.new(password: "some other password")
@@ -105,7 +105,7 @@ end
 
 #### Extra Headers per Client
 
-You can dynamically pass headers per client object, which will be merged with any headers set globally with Experian.configure:
+You can dynamically pass headers per client object, which will be merged with any headers set globally with `Experian.configure`:
 
 ```ruby
 client = Experian::Client.new(user_code: "code goes here", password: "password goes here")
@@ -175,4 +175,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Ruby OpenAI project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/moraki-finance/ruby-experian/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Ruby Experian project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/moraki-finance/ruby-experian/blob/main/CODE_OF_CONDUCT.md).
