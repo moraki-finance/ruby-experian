@@ -11,22 +11,6 @@ module Experian
   class AuthenticationError < Error; end
   class ConfigurationError < Error; end
 
-  class MiddlewareErrors < Faraday::Middleware
-    def call(env)
-      @app.call(env)
-    rescue Faraday::Error => e
-      raise e unless e.response.is_a?(Hash)
-
-      logger = Logger.new($stdout)
-      logger.formatter = proc do |_severity, _datetime, _progname, msg|
-        "\033[31mExperian HTTP Error (spotted in ruby-experian #{VERSION}): #{msg}\n\033[0m"
-      end
-      logger.error(e.response[:body])
-
-      raise e
-    end
-  end
-
   class Configuration
     attr_writer :user_code, :password, :version, :request_timeout, :base_uri, :extra_headers
     attr_reader :base_uri, :request_timeout, :version, :extra_headers

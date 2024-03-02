@@ -96,6 +96,25 @@ RSpec.describe Experian::Client do
         expect { report }.to raise_error(Experian::AuthenticationError)
       end
     end
+
+    describe "pdf format", :vcr do
+      let(:cif) { "A18413302" }
+      let(:report) { Experian::Client.new.report(cif:, format: :pdf) }
+
+      it "returns the url" do
+        expect(report).to match(/https:\/\/informes.axesor.es\/informe\?cif=A18413302&cod_servicio=57&tip_formato=3&cod_usuario=fake_user&crc=fake_crc/)
+      end
+    end
+  end
+
+  describe "when it fails to calculate the CRC" do
+    before do
+      allow(SHA3::Digest).to receive(:hexdigest).and_raise(StandardError, "some error")
+    end
+
+    it "should raise an error" do
+      expect { Experian::Client.new.report(cif: "A18413302") }.to raise_error(Experian::Error, "Error calculating CRC: some error")
+    end
   end
 
   describe "headers" do
