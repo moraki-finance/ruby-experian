@@ -44,5 +44,12 @@ RSpec.describe Experian do
         expect(Experian.configuration.request_timeout).to eq(custom_request_timeout)
       end
     end
+
+    context "when no password is set" do
+      it "raises an exception" do
+        Experian.configuration.password = nil
+        expect { Experian.configuration.password }.to raise_error(Experian::ConfigurationError, "Experian password missing!")
+      end
+    end
   end
 end
