@@ -1,5 +1,4 @@
 require "faraday"
-require "faraday_middleware"
 
 require_relative "experian/http"
 require_relative "experian/client"
