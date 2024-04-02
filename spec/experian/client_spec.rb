@@ -70,12 +70,16 @@ RSpec.describe Experian::Client do
         expect(report.number_of_employees).to eq(144)
       end
 
+      it ".cnae" do
+        expect(report.cnae).to eq(6311)
+      end
+
       it ".id" do
         expect(report.id).to have_attributes(
           cif: "A18413302",
           name: "AXESOR CONOCER PARA DECIDIR SA",
           infotel_code: "987857",
-          incorporation_date: "08/03/1996",
+          incorporation_date: Date.parse("08/03/1996"),
           social_form: "SOCIEDAD ANONIMA"
         )
       end

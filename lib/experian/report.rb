@@ -21,7 +21,7 @@ module Experian
           cif: id_xml["Cif"],
           name: id_xml["Nombre"],
           infotel_code: id_xml["CodigoInfotel"],
-          incorporation_date: id_xml["FechaFundacion"],
+          incorporation_date: Date.parse(id_xml["FechaFundacion"]),
           social_form: id_xml["FormaSocial"]["__content__"],
         )
       end
@@ -55,6 +55,10 @@ module Experian
           size: rating_xml["Tamaño"],
         )
       end
+    end
+
+    def cnae
+      data.dig("ActividadComercial", "Cnae")&.first&.dig("Codigo")&.to_i
     end
 
     private

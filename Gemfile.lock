@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-experian (0.0.6)
+    ruby-experian (0.0.7)
       faraday (>= 1)
       multi_xml (>= 0.6.0)
       rexml (>= 3.2)

@@ -132,6 +132,7 @@ The exposed sections for now are:
 - address
 - rating
 - number_of_employees
+- cnae
 
 ```ruby
 report = client.report(cif: "cif goes here")
