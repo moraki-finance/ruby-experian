@@ -4,6 +4,8 @@ require_relative "experian/http"
 require_relative "experian/client"
 require_relative "experian/version"
 require_relative "experian/report"
+require_relative "experian/credit_report"
+require_relative "experian/trade_report"
 
 module Experian
   class Error < StandardError; end
