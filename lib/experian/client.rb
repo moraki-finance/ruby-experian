@@ -2,6 +2,9 @@ module Experian
   class Client
     include Experian::HTTP
 
+    TRADE_REPORT = 388
+    CREDIT_REPORT = 57
+
     CONFIG_KEYS = %i[
       user_code password request_timeout base_uri extra_headers
     ].freeze
@@ -16,10 +19,29 @@ module Experian
       @faraday_middleware = faraday_middleware
     end
 
-    def report(cif:, format: :xml)
-      response = get(path: "/informe", format:, cif:, cod_servicio: 57)
+    def credit_report(cif:, format: :xml, as_response: false)
+      response = get(
+        path: "/informe",
+        format:,
+        cif:,
+        cod_servicio: CREDIT_REPORT
+      )
 
-      return Experian::Report.new(response) if format == :xml
+      return Experian::CreditReport.new(response) if format == :xml && !as_response
+
+      response
+    end
+
+    def trade_report(cif:, format: :xml, request_update: true, as_response: false)
+      response = get(
+        path: "/informe",
+        format:,
+        cif:,
+        garantizar_bajo_demanda: request_update ? 1 : 0,
+        cod_servicio: TRADE_REPORT,
+      )
+
+      return Experian::TradeReport.new(response) if format == :xml && !as_response
 
       response
     end

@@ -12,59 +12,27 @@ module Experian
       MultiXml.parser = :rexml
       @xml = MultiXml.parse(@raw_xml)
 
-      raise Experian::AuthenticationError if authentication_error?
+      raise error, error_message if error
     end
 
-    def id
-      if (id_xml = data["DatosIdentificativos"])
-        OpenStruct.new(
-          cif: id_xml["Cif"],
-          name: id_xml["Nombre"],
-          infotel_code: id_xml["CodigoInfotel"],
-          incorporation_date: Date.parse(id_xml["FechaFundacion"]),
-          social_form: id_xml["FormaSocial"]["__content__"],
-        )
-      end
-    end
-
-    def address
-      if (address_xml = data["DomicilioComercial"])
-        OpenStruct.new(
-          line: address_xml["Domicilio"],
-          city: address_xml["Poblacion"],
-          province: address_xml["Provincia"],
-          postal_code: address_xml["CodigoPostal"],
-          municipality: address_xml["Municipio"],
-        )
-      end
-    end
-
-    # Number of employees in the last recorded excercise
-    def number_of_employees
-      data.dig("ListaAnualEmpleados", "Empleado")&.first&.dig("EmpleadoFijo")&.to_i
-    end
-
-    def rating
-      if (rating_xml = data["Rating"])
-        return unless rating_xml["RatingAxesorDef"]
-
-        OpenStruct.new(
-          score: rating_xml["RatingAxesorDef"]&.strip&.to_i,
-          default_probability: rating_xml["ProbImpago"]&.to_f,
-          risk: rating_xml["GrupoRiesgo"],
-          size: rating_xml["Tamaño"],
-        )
-      end
-    end
-
-    def cnae
-      data.dig("ActividadComercial", "Cnae")&.first&.dig("Codigo")&.to_i
-    end
-
-    private
+    protected
 
     def data
       xml.dig("ServicioWebAxesor", "ListaPaquetesNegocio")
+    end
+
+    def error
+      return Experian::AuthenticationError if authentication_error?
+
+      Experian::Error if any_other_error?
+    end
+
+    def error_message
+      xml.dig("DatosError", "DesError")
+    end
+
+    def any_other_error?
+      xml.dig("DatosError", "CodError")
     end
 
     def authentication_error?
