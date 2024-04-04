@@ -40,13 +40,11 @@ module Experian
       (Date.today << 18).year
     end
 
-    def financial_data(section_name, value_name = nil, period:)
+    def financial_data(section_name, value_name, period:)
       value_section = section(section_name)
 
       if value_name
         value_section&.find { |d| d["Tipo"] == value_name }&.dig("ListaValores", "Valor")&.find { |v| v["Periodo"] == period.to_s }&.dig("Individual")&.to_i
-      else
-        value_section
       end
     end
 

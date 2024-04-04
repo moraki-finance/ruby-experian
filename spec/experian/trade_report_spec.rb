@@ -12,8 +12,8 @@ RSpec.describe Experian::TradeReport do
   end
 
   describe "#model_200" do
-    it "returns no values for 2022 model" do
-      expect(report.model_200(period: 2022)).to match({
+    it "returns no values for last period" do
+      expect(report.model_200).to match({
         "00101" => nil,
         "00102" => nil,
         "00136" => nil,
