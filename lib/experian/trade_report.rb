@@ -27,6 +27,7 @@ module Experian
         "00285" => financial_data("PerdidasGanancias", "40900", period:), # Imputación de subvenciones de inmovilizado no financiero y otras
         "00286" => financial_data("PerdidasGanancias", "41000", period:), # Excesos de provisiones
         "00287" => financial_data("PerdidasGanancias", "41100", period:), # Deterioro y resultado por enajenaciones del inmovilizad
+        "00295" => financial_data("PerdidasGanancias", "41300", period:), # Otros resultados
         "00296" => financial_data("PerdidasGanancias", "49100", period:), # Resultado de explotacion
         "00305" => financial_data("PerdidasGanancias", "41500", period:), # Gastos Financieros
         "00326" => financial_data("PerdidasGanancias", "41900", period:), # Impuestos Sobre Beneficios
