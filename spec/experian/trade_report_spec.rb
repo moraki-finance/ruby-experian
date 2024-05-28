@@ -14,6 +14,8 @@ RSpec.describe Experian::TradeReport do
   describe "#model_200" do
     it "returns no values for last period" do
       expect(report.model_200).to match({
+        "00041" => nil,
+        "00042" => nil,
         "00101" => nil,
         "00102" => nil,
         "00136" => nil,
@@ -44,6 +46,8 @@ RSpec.describe Experian::TradeReport do
 
     it "returns all the fields for 2021 model" do
       expect(report.model_200(period: 2021)).to match({
+        "00041" => 144,
+        "00042" => 1,
         "00101" => 10662579,
         "00102" => 5347259,
         "00136" => 5707152,

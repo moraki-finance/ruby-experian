@@ -7,7 +7,6 @@ gem "dotenv", "~> 2.8.1"
 gem "rake", "~> 13.1"
 gem "rspec", "~> 3.13"
 gem "rubocop", "~> 1.50.2"
-gem "vcr", "~> 6.1.0"
 gem "webmock", "~> 3.23.0"
 
 group :development, :test do
@@ -19,6 +18,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "vcr", "~> 6.1.0"
   gem "simplecov"
   gem "simplecov-cobertura"
 end

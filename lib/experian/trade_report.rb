@@ -2,6 +2,9 @@ module Experian
   class TradeReport < Report
     def model_200(period: last_submitted_year)
       {
+        "00041" => number_of_employees(period:, type: "EmpleadoFijo"),
+        "00042" => number_of_employees(period:, type: "EmpleadoEventual"),
+
         # Balance Sheet - Assets
         "00101" => financial_data("Activo", "11000", period:), # ACTIVO NO CORRIENTE
         "00102" => financial_data("Activo", "11100", period:), # Inmovilizado intangible
@@ -51,6 +54,10 @@ module Experian
 
     def section(section_name)
       data.dig("InformeEconomicoFinanciero")&.first&.dig("ListaGrupos", "Grupo").find { |d| d["Tipo"][section_name] }&.dig("ListaColumnas", "Columna", "ListaDatos", "Dato")
+    end
+
+    def number_of_employees(period:, type: "EmpleadoFijo")
+      data.dig("ListaAnualEmpleados", "Empleado").find { |d| d["Ejercicio"] == period.to_s }&.dig(type)&.to_i
     end
   end
 end
