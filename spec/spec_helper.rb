@@ -9,7 +9,9 @@ if ENV["COVERAGE_DIR"]
 end
 
 require "bundler/setup"
-require "dotenv/load"
+require "dotenv"
+Dotenv.load(".env.test")
+
 require "experian"
 Bundler.require(:default, :development, :test)
 

@@ -38,6 +38,44 @@ module Experian
       }
     end
 
+    def constitution_date
+      date = data.dig("SeccionDatosRegistrales", "FechaConstitucion")
+      date && Date.parse(date)
+    end
+
+    def address
+      if (address_xml = data["SeccionDatosRegistrales"]["DomicilioSocial"])
+        OpenStruct.new(
+          line: address_xml["Domicilio"],
+          city: address_xml["Poblacion"] || address_xml["Provincia"],
+          province: address_xml["Provincia"],
+          postal_code: address_xml["CodigoPostal"],
+          municipality: address_xml["Municipio"],
+        )
+      end
+    end
+
+    def most_recent_number_of_employees
+      data.dig("ListaAnualEmpleados", "Empleado").first&.dig("EmpleadoFijo")&.to_i
+    end
+
+    def cnae
+      data.dig("ActividadComercial", "Cnae")&.first&.dig("Codigo")&.to_i
+    end
+
+    def rating
+      if (rating_xml = data["Rating"])
+        return unless rating_xml["RatingAxesorDef"]
+
+        OpenStruct.new(
+          score: rating_xml["RatingAxesorDef"]&.strip&.to_i,
+          default_probability: rating_xml["ProbImpago"]&.to_f,
+          risk: rating_xml["GrupoRiesgo"],
+          size: rating_xml["Tamaño"],
+        )
+      end
+    end
+
     private
 
     def last_submitted_year
