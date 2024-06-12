@@ -61,6 +61,8 @@ Experian.configure do |config|
 end
 ```
 
+By default, this gem will look for the environment variables `EXPERIAN_USER_CODE` and `EXPERIAN_PASSWORD` to set the default values for user code and password.
+
 Then you can create a client like this:
 
 ```ruby
@@ -122,9 +124,9 @@ You can further configure the faraday connection by passing in a block to the cl
   end
 ```
 
-### Report
+### Credit Report
 
-You can hit the report api to get the 360 credit report from Experian by passing in a CIF to the call. Note that only some sections of the report are exposed. Other sections will be exposed as needed / requested.
+You can hit the credit report api to get the 360 credit report from Experian by passing in a CIF to the call. Note that only some sections of the report are exposed. Other sections will be exposed as needed / requested.
 
 The exposed sections for now are:
 
@@ -133,9 +135,29 @@ The exposed sections for now are:
 - rating
 - number_of_employees
 - cnae
+- constitution_date
 
 ```ruby
-report = client.report(cif: "cif goes here")
+report = client.credit_report(cif: "cif goes here")
+report.rating.inspect
+# => "#<OpenStruct score=8, default_probability=0.529, risk=\"Mínimo\", size=\"Grande\">"
+```
+
+### Trade Report
+
+You can hit the trade report api to get the 360 trade report from Experian by passing in a CIF to the call. Note that only some sections of the report are exposed. Other sections will be exposed as needed / requested.
+
+The exposed sections for now are:
+
+- model_200(period:)
+- address
+- rating
+- most_recent_number_of_employees
+- cnae
+- constitution_date
+
+```ruby
+report = client.trade_report(cif: "cif goes here")
 report.rating.inspect
 # => "#<OpenStruct score=8, default_probability=0.529, risk=\"Mínimo\", size=\"Grande\">"
 ```

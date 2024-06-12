@@ -76,4 +76,43 @@ RSpec.describe Experian::TradeReport do
       })
     end
   end
+
+  it ".most_recent_number_of_employees" do
+    expect(report.most_recent_number_of_employees).to eq(144)
+  end
+
+  it ".cnae" do
+    expect(report.cnae).to eq(6311)
+  end
+
+  it ".constitution_date" do
+    expect(report.constitution_date).to eq(Date.parse("08/03/1996"))
+  end
+
+  it ".rating" do
+    allow(report).to receive(:data).and_return({
+      "Rating" => {
+        "RatingAxesorDef" => "8 ",
+        "ProbImpago" => "0.56",
+        "GrupoRiesgo" => "Bajo",
+        "Tamaño" => "Grande"
+      }
+    })
+    expect(report.rating).to have_attributes(
+      score: 8,
+      default_probability: 0.56,
+      risk: "Bajo",
+      size: "Grande",
+    )
+  end
+
+  it ".address" do
+    expect(report.address).to have_attributes(
+      line: "PARQUE EMPRESARIAL SAN ISIDRO, S/N - EDIFICIO AXESOR",
+      city: "ARMILLA",
+      province: "GRANADA",
+      postal_code: nil, # comes as nil in the report
+      municipality: "ARMILLA"
+    )
+  end
 end

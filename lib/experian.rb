@@ -21,8 +21,8 @@ module Experian
     DEFAULT_REQUEST_TIMEOUT = 120
 
     def initialize
-      @user_code = nil
-      @password = nil
+      @user_code = ENV.fetch("EXPERIAN_USER_CODE", nil)
+      @password = ENV.fetch("EXPERIAN_PASSWORD", nil)
       @version = DEFAULT_VERSION
       @request_timeout = DEFAULT_REQUEST_TIMEOUT
       @base_uri = DEFAULT_BASE_URI
