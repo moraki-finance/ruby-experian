@@ -44,7 +44,7 @@ module Experian
     end
 
     def address
-      if (address_xml = data["SeccionDatosRegistrales"]["DomicilioSocial"])
+      if (address_xml = data.dig("SeccionDatosRegistrales", "DomicilioSocial"))
         OpenStruct.new(
           line: address_xml["Domicilio"],
           city: address_xml["Poblacion"] || address_xml["Provincia"],
@@ -56,7 +56,7 @@ module Experian
     end
 
     def most_recent_number_of_employees
-      data.dig("ListaAnualEmpleados", "Empleado").first&.dig("EmpleadoFijo")&.to_i
+      data.dig("ListaAnualEmpleados", "Empleado")&.first&.dig("EmpleadoFijo")&.to_i
     end
 
     def cnae

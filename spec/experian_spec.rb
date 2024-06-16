@@ -1,6 +1,6 @@
 RSpec.describe Experian do
   it "has a version number" do
-    expect(Experian::VERSION).to eq "0.1.1"
+    expect(Experian::VERSION).to eq "0.1.2"
   end
 
   describe "#configure" do
