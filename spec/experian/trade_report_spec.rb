@@ -77,8 +77,15 @@ RSpec.describe Experian::TradeReport do
     end
   end
 
-  it ".most_recent_number_of_employees" do
-    expect(report.most_recent_number_of_employees).to eq(144)
+  describe ".most_recent_number_of_employees" do
+    it "returns the number of employees for the most recent year" do
+      expect(report.most_recent_number_of_employees).to eq(144)
+    end
+
+    it "returns nil if there are no employees" do
+      allow(report).to receive(:data).and_return({ "ListaAnualEmpleados" => {} })
+      expect(report.most_recent_number_of_employees).to be_nil
+    end
   end
 
   it ".cnae" do
