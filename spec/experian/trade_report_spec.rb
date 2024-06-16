@@ -75,6 +75,11 @@ RSpec.describe Experian::TradeReport do
         "00327" => 850990
       })
     end
+
+    it "returns nil number of employees" do
+      allow(report).to receive(:data).and_return({ "ListaAnualEmpleados" => {} })
+      expect(report.model_200(period: 2021)["00041"]).to be_nil
+    end
   end
 
   describe ".most_recent_number_of_employees" do

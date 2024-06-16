@@ -91,11 +91,11 @@ module Experian
     end
 
     def section(section_name)
-      data.dig("InformeEconomicoFinanciero")&.first&.dig("ListaGrupos", "Grupo").find { |d| d["Tipo"][section_name] }&.dig("ListaColumnas", "Columna", "ListaDatos", "Dato")
+      data.dig("InformeEconomicoFinanciero")&.first&.dig("ListaGrupos", "Grupo")&.find { |d| d["Tipo"][section_name] }&.dig("ListaColumnas", "Columna", "ListaDatos", "Dato")
     end
 
     def number_of_employees(period:, type: "EmpleadoFijo")
-      data.dig("ListaAnualEmpleados", "Empleado").find { |d| d["Ejercicio"] == period.to_s }&.dig(type)&.to_i
+      data.dig("ListaAnualEmpleados", "Empleado")&.find { |d| d["Ejercicio"] == period.to_s }&.dig(type)&.to_i
     end
   end
 end
